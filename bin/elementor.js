@@ -27,10 +27,8 @@ var getOptions = function() {
   // Test for flags
   var options = {};
 
-  // Path to protractor.conf.js
-  if (args.configPath) {
-    options.configPath = args.configPath;
-  }
+  // Path to protractor.conf.j
+  options.configPath = args.configPath || path.resolve(__dirname, '../lib/protractor.conf.js')
 
   // URL to open on startup
   if (args.url) {

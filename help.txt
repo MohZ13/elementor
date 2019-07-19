@@ -1,5 +1,5 @@
 Usage:
-    $0 [url] [options]
+    $0 [options]
 
 Options:
   --url           URL to open
