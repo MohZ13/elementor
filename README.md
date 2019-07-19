@@ -36,24 +36,19 @@ $ webdriver-manager update
 # Start the server
 $ webdriver-manager start
 ```
+> ### For this to work node version must be: 6.9.x
+You can manage it using [n](https://github.com/tj/n) or [nvm](https://github.com/nvm-sh/nvm)
 
 In another terminal run elementor with an optional url:
 
 ```shell
-$ elementor https://angularjs.org
-```
-
-If you need to pass flags to chrome use the `--chrome` flag. Use spaces to
-separate the flags.
-
-```shell
-$ elementor https://angularjs.org --chrome="--disable-web-security --some-other-flag=123"
+$ node /path/to/elementor.js --configPath=/path/to/protractor.conf.js --url=http://test.com/
 ```
 
 For applications not using Angular, just add the `--nonAngular` flag:
 
 ```shell
-$ elementor https://google.com --nonAngular
+$ node /path/to/elementor.js --configPath=/path/to/protractor.conf.js --url=http://test.com/ --nonAngular
 ```
 
 ## How it works
