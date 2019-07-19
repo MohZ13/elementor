@@ -35,6 +35,11 @@ var getSuggestions = function() {
       locators.byId = $0.getAttribute('id');
     }
 
+    // data-test?
+    if ($0.getAttribute('data-test')) {
+      locators.byDatatest = $0.getAttribute('data-test');
+    }
+
     // Button?
     if ($0.tagName === 'BUTTON' || $0.getAttribute('type') === 'button') {
       locators.byButtonText = $0.textContent || $0.getAttribute('value');
@@ -59,12 +64,15 @@ var getSuggestions = function() {
       locators.byBinding = bindingName;
     }
 
-    // Model? Test all of the prefixes.
+    // Model, repeater? Test all of the prefixes.
     var prefixes = ['ng-', 'ng_', 'data-ng-', 'x-ng-', 'ng:'];
     prefixes.forEach(function(prefix) {
       // Bail out if model was found.
       if (!locators.byModel &&  $0.getAttribute(prefix + 'model')) {
         locators.byModel = $0.getAttribute(prefix + 'model');
+      }
+      if (!locators.byRepeater &&  $0.getAttribute(prefix + 'repeat')) {
+        locators.byRepeater = $0.getAttribute(prefix + 'repeat');
       }
     });
 

@@ -4,12 +4,13 @@ var minimist = require('minimist');
 var path = require('path');
 
 var args = minimist(process.argv.slice(2), {
-  string: 'chrome',
+  string: ['configPath', 'url'],
   alias: {h: 'help', v: 'version'}
 });
 
 if (args.help) {
-  var cmd = require('path').basename(process.argv[1]);
+  var cmd = path.basename(process.argv[1]);
+  console.log('For extension use: --load-extension=', path.join(__dirname, '../extension'));
   console.log(require('fs')
       .readFileSync(path.join(__dirname, '../help.txt'), 'utf-8')
       .replace(/\$0/g, cmd)
@@ -26,19 +27,19 @@ var getOptions = function() {
   // Test for flags
   var options = {};
 
+  // Path to protractor.conf.js
+  if (args.configPath) {
+    options.configPath = args.configPath;
+  }
+
+  // URL to open on startup
+  if (args.url) {
+    options.url = args.url;
+  }
+
   // Ignore synchronization?
   if (args.nonAngular) {
     options.ignoreSynchronization = true;
-  }
-
-  // Chrome arguments?
-  if (args.chrome) {
-    options.chromeOptions = args.chrome;
-  }
-
-  // Is there a url?
-  if (args._[0]) {
-    options.url = args._[0];
   }
 
   return options;
